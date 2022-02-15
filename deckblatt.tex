@@ -1,0 +1,126 @@
+% deckblatt.tex, 2019/03/15
+\documentclass[a4paper,12pt]{report}
+%Inhaltsverzeichnis in Kapitel und Sektionen aufgeteilt  \chapter{title} > \section{title} > subsection{title} \subsubsection{title}
+
+% Pakete und Paket-Configs
+\usepackage{times} % Times Roman als Standardschrift
+\usepackage[ngerman]{babel} % neue deutsche Rechtschreibung und Trennung
+\usepackage{fancyhdr} % spezielle Kopfzeilen
+\usepackage[utf8]{inputenc} % Umlaute ��� auch normal benutzen und nicht maskieren
+\usepackage[babel, german=quotes]{csquotes}
+\usepackage{subfigure} % Figures divided into subfigures.
+\usepackage{ifthen} % Ermöglicht ifthenelse und whiledo
+\usepackage{amsfonts} % Extra mathematical symbols
+\usepackage[rflt]{floatflt} % verbessertes floatfig, als um figure's fliesende texte
+\usepackage[T1]{fontenc} % ?? aber notwendig für korrekte PDF-Metadaten
+%\usepackage{longtable} % Support for tables longer than a page.
+%\usepackage{a4wide} % Increases width of printed area of an a4 page.
+%\usepackage{alltt} % verbatim environment except that \ and braces have their usual meanings.
+\usepackage{listings} % Typeset source code listings using LaTeX.
+\usepackage{moreverb} % bessere verbatim-umgebungen
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{xcolor} % Farben Definierbar \definecolor{fhorange}{RGB}{255,153,0}
+\usepackage{biblatex} % F�r das Erstellen eines Literaturverzeichnisses
+\addbibresource{literatur.bib}  % f�r das erstellen des Literaturverzeichnisses empfielt sich die Software Mendeley, diese erm�glicht einfaches hinzuf�gen B�chern und das exportieren in eine .bib Datei
+\pagenumbering{Roman} % Nummerierung der Seiten
+\newcommand{\maximagewidth}{15cm} % maximal m�gliche Bildbreite
+
+\setlength{\parindent}{0cm} % Einr�ckung am Abstzanfang
+\setlength{\parskip}{5pt plus 2pt minus 1pt} % Abstand der Abs�tze zueinander
+\frenchspacing % Kein Zusatzzwischenraum nach Satzzeichen
+
+\setcounter{secnumdepth}{3} % Z�hlung bis paragraph 1.1.1
+\setcounter{tocdepth}{3} % Inhaltsverzeichnis bis paragraph 1.1.1
+
+%\makeglossary % Schreibe ein Glossar-File
+
+\title{Titel der Arbeit}
+\author{Name des Authors}
+\date{\today}
+
+\definecolor{fhorange}{RGB}{255,153,0}
+\begin{document}
+
+%%% Titelseite %%%
+\begin{titlepage}
+\thispagestyle{empty}
+\centerline{
+\begin{minipage}{15cm}
+	\flushright{
+		\includegraphics[width=4cm]{fhlogo.png} \hspace{1.5cm} \ \\
+		\textbf{\large Hochschule \hspace{3.5cm} ~ \\ Augsburg } \large University of \hspace{1cm} ~ \\ Applied Sciences \hspace{0.2cm} ~\\~
+	}
+	\flushleft{
+		\textbf{\large \textcolor{fhorange}{Bachelorthesis}} \hspace{7.7cm} \textcolor{fhorange}{\large Fakultät für} \vspace{0.1cm} \\~  \hspace{10.75cm} \textcolor{fhorange}{\large Informatik}
+	}
+	\vspace{1cm}
+	\flushleft{ \large Studienrichtung \\
+		\vspace{0.2cm}
+		Informatik
+	}
+	\vspace{0.1cm}
+	\flushleft{
+		\textcolor{fhorange}{\large \textbf{Nseupi Nono Hugues Landry \\
+		Konfiguration und Optimierung des Embedded-Linux Betriebssystem einer Automotive Image Processing Unit}}
+	}
+	\vspace{0.2cm}
+	\flushleft{ \large Erstprüfer: Hubert Högl \\ Zweitprüfer: \\
+		\vspace{0.1cm}
+		Abgabe der Arbeit am: dd.mm.yyyy
+	}
+	\flushleft{ In Kooperation mit Firma: EDAG Engineering GmbH\\ Hsa-Digit \\ Betreuer: Mladen Kovacev \\
+		\vspace{0.5cm}
+		\includegraphics[width=3cm]{hsa_digit.png} \hspace{5cm}
+		\tiny{\textcolor{gray}{~\\
+			\hspace{11.3cm} Hochschule für angewandte \\
+			\hspace{11.3cm} Wissenschaften Augsburg \\
+			\hspace{11.3cm} University of Applied Sciences \\
+			\hspace{11.3cm} An der Hochschule 1 \\
+			\hspace{11.3cm} D-86161 Augsburg \\
+			\hspace{11.3cm} Telefon +49 821 55 86-0 \\
+			\hspace{11.3cm} Fax +49 821 55 86-3222 \\
+			\hspace{11.3cm} www.hs-augsburg.de \\
+			\hspace{11.3cm} info@hs-augsburg.de\\
+			}~\\
+			\hspace{11.3cm} Fakultät für Informatik \\
+			\hspace{11.3cm} Telefon +49 821 5586-3450 \\
+  		\hspace{11.3cm} Nseupi Nono Hugues Landry \\
+	  	\hspace{11.3cm} Salomon-Idler-str. 25 \\
+			\hspace{11.3cm} 86159 Augsburg \\
+			\hspace{11.3cm} Telefon +49 157 795 529 70 \\
+			\hspace{11.3cm} Landrynono60@yahoo.fr \\
+	}}
+\end{minipage}}\par
+\end{titlepage}
+% Nicht über die Fehlermeldung There's no line here to end. \end... liegt daran LaTex es nicht mag wenn Leerzeilen manuell eingef�gt werden
+
+
+
+% Zusammenfassung
+\thispagestyle{empty}
+\section*{Abstract}
+...
+
+\newpage
+\tableofcontents
+% Wenn das Inhaltsverzeichnis aktualisiert werden muss 2 mal kompilieren, erst dann wird die Aktualisierung angezeigt
+\newpage
+\pagenumbering{arabic}
+
+
+%% Include alle Sub-Files
+\include{./Einleitung/einleitung}
+\include{./Grundlagen/grundlagen}
+%\include{4anforderungen}
+%\include{3stand}
+%\include{5spezifikation}
+%\include{6implementation}
+%\include{7zusammenfassung}
+%\include{8suffix}
+% Inhaltsverzeichnis
+
+
+
+
+\end{document}
